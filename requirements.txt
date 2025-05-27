@@ -1,0 +1,5 @@
+streamlit
+langchain
+python-dotenv
+crewai
+together

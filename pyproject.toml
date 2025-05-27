@@ -1,0 +1,17 @@
+[project]
+name = "adaptive_tutoring_system_py"
+version = "0.1.0"
+description = "An AI-powered adaptive tutoring system built with CrewAI."
+authors = ["Nosheen Sobhani <nosheensobhani@gmail.com>"]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "crewai",
+    "openai",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
