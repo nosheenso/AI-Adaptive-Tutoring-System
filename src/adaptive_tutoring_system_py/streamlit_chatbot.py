@@ -26,16 +26,12 @@ if prompt := st.chat_input("Ask your tutor a question..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").markdown(prompt)
 
-    # Construct system prompt
-    system_msg = f"{tutor.role}: {tutor.backstory}"
+    # Construct full prompt with backstory
+    full_prompt = f"{tutor.role}: {tutor.backstory}\n\n{prompt}"
 
-    # Send to Together.ai via agent’s LLM
-    response = tutor.llm.invoke([
-        {"role": "system", "content": system_msg},
-        {"role": "user", "content": prompt}
-    ])
+    # Run the agent with the full prompt
+    reply = tutor.run(full_prompt).strip()
 
-    # Display tutor's response
-    reply = response.content.strip()
+    # Display and store the tutor's response
     st.chat_message("assistant").markdown(reply)
     st.session_state.messages.append({"role": "assistant", "content": reply})
