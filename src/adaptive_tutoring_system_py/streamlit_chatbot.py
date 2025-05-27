@@ -26,12 +26,16 @@ if prompt := st.chat_input("Ask your tutor a question..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.chat_message("user").markdown(prompt)
 
-    # Construct full prompt with backstory
-    full_prompt = f"{tutor.role}: {tutor.backstory}\n\n{prompt}"
+    # Construct system message from agent's role and backstory
+    system_msg = f"{tutor.role}: {tutor.backstory}"
 
-    # Run the agent with the full prompt
-    reply = tutor.run(full_prompt).strip()
+    # Use the agent's LLM directly
+    response = tutor.llm.invoke([
+        {"role": "system", "content": system_msg},
+        {"role": "user", "content": prompt}
+    ])
 
-    # Display and store the tutor's response
+    # Extract and show response
+    reply = response.content.strip()
     st.chat_message("assistant").markdown(reply)
     st.session_state.messages.append({"role": "assistant", "content": reply})
