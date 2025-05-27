@@ -13,10 +13,6 @@ This project is an intelligent, multi-agent tutoring system built using [CrewAI]
 
 ---
 
-## 🏗 Project Structure
-
----
-
 ## 🛠 Requirements
 
 - Python >= 3.9
